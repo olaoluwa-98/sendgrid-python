@@ -20,5 +20,6 @@ from .section import Section
 from .spam_check import SpamCheck
 from .subscription_tracking import SubscriptionTracking
 from .substitution import Substitution
+from .dynamic_template_data import DynamicTemplateData
 from .tracking_settings import TrackingSettings
 from .validators import ValidateAPIKey

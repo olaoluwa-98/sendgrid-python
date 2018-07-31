@@ -11,6 +11,7 @@ class Personalization(object):
         self._subject = None
         self._headers = []
         self._substitutions = []
+        self._dynamic_template_data = []
         self._custom_args = []
         self._send_at = None
 
@@ -124,6 +125,25 @@ class Personalization(object):
         :type substitution: Substitution
         """
         self._substitutions.append(substitution.get())
+        
+    @property
+    def dynamic_template_data(self):
+        """dynamic_template_data to be applied within this Personalization.
+
+        :rtype: list(dict)
+        """
+        return self._dynamic_template_data
+
+    @dynamic_template_data.setter
+    def dynamic_template_data(self, value):
+        self._dynamic_template_data = value
+
+    def add_dynamic_template_data(self, dynamic_template_data):
+        """Add a new dynamic_template_data to this Personalization.
+
+        :type dynamic_template_data: dynamic_template_data
+        """
+        self._dynamic_template_data.append(dynamic_template_data.get())
 
     @property
     def custom_args(self):
@@ -189,6 +209,12 @@ class Personalization(object):
             for key in self.substitutions:
                 substitutions.update(key)
             personalization["substitutions"] = substitutions
+
+        if self.dynamic_template_data:
+            dynamic_template_data = {}
+            for key in self.dynamic_template_data:
+                dynamic_template_data.update(key)
+            personalization["dynamic_template_data"] = dynamic_template_data
 
         if self.custom_args:
             custom_args = {}
